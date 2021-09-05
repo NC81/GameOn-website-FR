@@ -19,9 +19,8 @@ const inputEmail = document.querySelector("#email");
 const inputBirthdate = document.querySelector("#birthdate");
 const inputTournamentQuantity = document.querySelector("#quantity");
 const inputTermsOfUse = document.querySelector("#checkbox1");
-const confirmBackground = document.querySelector(".bground-confirm");
-const confirmMessage = document.querySelector(".modal-confirm");
-const confirmButtonClose = document.querySelector(".close-confirm");
+const confirmationBlock = document.querySelector(".modal-confirm");
+const confirmationButtonClose = document.querySelector(".close-confirm");
 
 // MODAL
 // Launch modal event
@@ -44,30 +43,23 @@ function closeModal() {
 // Add "novalidate" attribute to form
 form.setAttribute("novalidate", "");
 
-// Add new divs for error messages
-for (const formData of formDatas) {
-  const errorDiv = document.createElement("div");
-  formData.appendChild(errorDiv); 
-  errorDiv.classList.add("errorDiv");
-}
-
-// Add class for input types (input: DOM Element, error: error message, div: error div, regex: regular expression)
+// Add class for input types (input: DOM Element, div: ?error div?, error: error message,  regex: regular expression)
 class InputType {
-  constructor(input, error, div, regex) {
+  constructor(input, div, error, regex) {
   this.input = input;
-  this.error = error;
   this.div = div;
+  this.error = error;
   this.regex = regex;
   }
   // Method#1 : Verify input value with regex
   verifyRegex() {
     if (!this.regex.test(this.input.value)) {
-      this.div.classList.add("errorDivEnabled");     
-      this.div.textContent = this.error; 
+      this.div.setAttribute("data-error", this.error);
+      this.div.setAttribute("data-error-visible", "true");
       formIsValid = false;
     } else {
-      this.div.classList.remove("errorDivEnabled");
-      this.div.textContent = "";
+      this.div.setAttribute("data-error", "");
+      this.div.setAttribute("data-error-visible", "false");
     }
   }
   // Method#2 : Verify if date is valid
@@ -77,12 +69,12 @@ class InputType {
     const ageInMilliseconds = new Date(dateDifference);
     const ageInYears = Math.abs(ageInMilliseconds.getUTCFullYear() - 1970);
     if (isNaN(birthdateValue.getTime()) || (ageInYears < 18)) {
-      this.div.classList.add("errorDivEnabled");
-      this.div.textContent = this.error;
+      this.div.setAttribute("data-error", this.error);
+      this.div.setAttribute("data-error-visible", "true");
       formIsValid = false;
     } else {
-      this.div.classList.remove("errorDivEnabled");
-      this.div.textContent = "";
+      this.div.setAttribute("data-error", "");
+      this.div.setAttribute("data-error-visible", "false");
     }
   }
   // Method#3 : Verify if input is checked 
@@ -92,12 +84,12 @@ class InputType {
       if (!input.checked) {
         failure++;
       } if (failure === array.length) { 
-        this.div.classList.add("errorDivEnabled");
-        this.div.textContent = this.error;
+        this.div.setAttribute("data-error", this.error);
+        this.div.setAttribute("data-error-visible", "true");
         formIsValid = false;
       } else {
-        this.div.classList.remove("errorDivEnabled");
-        this.div.textContent = "";
+        this.div.setAttribute("data-error", "");
+        this.div.setAttribute("data-error-visible", "false");
       }
     }
   }
@@ -106,12 +98,6 @@ class InputType {
 // Elements used in method#3
 const inputTournamentLocations = document.querySelectorAll("input[name='location']");
 const inputTermsOfUseArray = [inputTermsOfUse];
-
-// Regular expressions
-const regexFirstAndLast = /^[a-zA-Z]{2,50}$/;
-const regexLast = /^[a-zA-Z]{2,50}$/;
-const regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const regexTournaments = /^[1-9]{0,1}[0-9]$/;
 
 // Error messages
 const errorMessageFirst = "Veuillez saisir entre 2 et 50 caractères pour le champ du prénom.";
@@ -122,17 +108,19 @@ const errorMessageTournaments = "Veuillez entrer le nombre de tournois auxquels 
 const errorMessageLocation = "Vous devez choisir une option.";
 const errorMessageTermsOfUse = "Vous devez vérifier que vous acceptez les termes et conditions.";
 
-// NodeList to catch each error div
-const errorDivs = document.querySelectorAll(".errorDiv");
+// Regular expressions
+const regexFirstAndLast = /^[a-zA-Z]{2,50}$/;
+const regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const regexTournaments = /^[1-9]{0,1}[0-9]$/;
 
 // Add an instance for each input type
-const firstName = new InputType (inputFirst, errorMessageFirst, errorDivs[0], regexFirstAndLast);
-const lastName = new InputType (inputLast, errorMessageLast, errorDivs[1], regexFirstAndLast);
-const email = new InputType (inputEmail, errorMessageEmail, errorDivs[2], regexEmail);
-const birthdate = new InputType (inputBirthdate, errorMessageBirthdate, errorDivs[3]);
-const tournaments = new InputType (inputTournamentQuantity, errorMessageTournaments, errorDivs[4], regexTournaments);
-const city = new InputType ("", errorMessageLocation, errorDivs[5]);
-const termsOfUse = new InputType ("", errorMessageTermsOfUse, errorDivs[6]);
+const firstName = new InputType (inputFirst, formDatas[0], errorMessageFirst, regexFirstAndLast);
+const lastName = new InputType (inputLast, formDatas[1], errorMessageLast, regexFirstAndLast);
+const email = new InputType (inputEmail, formDatas[2], errorMessageEmail, regexEmail);
+const birthdate = new InputType (inputBirthdate, formDatas[3], errorMessageBirthdate);
+const tournaments = new InputType (inputTournamentQuantity, formDatas[4], errorMessageTournaments,  regexTournaments);
+const city = new InputType ("", formDatas[5], errorMessageLocation);
+const termsOfUse = new InputType ("", formDatas[6], errorMessageTermsOfUse);
 
 // Check if form is valid
 let formIsValid;
@@ -158,8 +146,7 @@ function validate(e) {
   if (formIsValid === false) {
     return false;
   } else {
-    form.style.display = "none";
-    confirmMessage.style.display = "block";
+    displayConfirmation()
     return true;
   }
 }
@@ -167,5 +154,11 @@ function validate(e) {
 // Validate event
 form.addEventListener("submit", validate);
 
+// Display confirmation message
+function displayConfirmation() {
+  form.style.display = "none";
+  confirmationBlock.style.display = "block";
+}
+
 // Close confirmation box event
-confirmButtonClose.addEventListener("click", closeModal);
+confirmationButtonClose.addEventListener("click", closeModal);

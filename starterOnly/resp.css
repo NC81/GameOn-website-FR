@@ -1,0 +1,152 @@
+/* @media screen and (max-width: 800px) {
+    .topnav {
+        margin: 3.5% 3.5% 0.5% 5%;
+    }
+
+    .hero-section {
+        display: block;
+        box-shadow: unset;
+    }
+
+    .hero-content {
+        background: #fff;
+        color: #000;
+        padding: 0 20px 20px 0;
+    }
+
+    .hero-content::after {
+        content: unset;
+    }
+
+    .hero-content .btn-signup {
+        display: none;
+    }
+
+    .hero-headline {
+        min-width: initial;
+        font-size: 3.5rem;
+        white-space: normal;
+    }
+
+    .hero-text {
+        width: unset;
+        font-size: 1.5rem;
+        margin-top: 30px;
+    }
+
+    .hero-img img {
+        border-radius: 10px;
+        margin-top: 25px;
+    }
+
+    .hero-section > .btn-signup {
+        display: block;
+        margin: 32px auto 10px;
+        padding: 12px 35px;
+    }
+
+    .copyrights {
+        margin-top: 50px;
+        text-align: center;
+    }
+} */
+ 
+@media screen and (max-width: 768px) {
+  .topnav {
+    margin: 3.5% 3.5% 0.5% 5%;
+  }
+
+  .hero-section {
+    display: block;
+    box-shadow: unset;
+  }
+
+  .hero-content {
+      background: #fff;
+      color: #000;
+      padding: 0 20px 20px 0;
+  }
+
+  .hero-content::after {
+      content: unset;
+  }
+
+  .hero-content .btn-signup {
+      display: none;
+  }
+
+  .hero-headline {
+      min-width: initial;
+      font-size: 4.5rem;
+      white-space: normal;
+  }
+
+  .hero-text {
+      width: unset;
+      font-size: 1.5rem;
+      margin-top: 30px;
+  }
+
+  .hero-img img {
+      border-radius: 10px;
+      margin-top: 25px;
+  }
+
+  .hero-section > .btn-signup {
+      display: block;
+      margin: 32px auto 10px;
+      padding: 12px 35px;
+  }
+
+  .copyrights {
+      margin-top: 50px;
+      text-align: center;
+  }  
+  
+  .topnav a {
+    display: none;
+  }
+
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+
+  .topnav.responsive {
+    position: relative;
+  }
+
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .topnav a {
+    display: none;
+  }
+
+  .topnav a.icon {
+    float: right;
+    display: block;
+    margin-top: -15px;
+  }
+
+  .hero-section .hero-content {
+    min-width: initial;
+  }
+  
+  .hero-headline {
+    font-size: 3.5rem;
+    white-space: normal;
+  }
+} 
+  
