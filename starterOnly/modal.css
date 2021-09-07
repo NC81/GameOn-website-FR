@@ -11,11 +11,10 @@
 
 /* Landing Page */
 body {
-  margin: 0;
   background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -30,7 +29,7 @@ img {
 
 .topnav {
   overflow: hidden;
-  margin: 3.5% ;
+  margin: 3.5% 5%;
 }
 
 .header-logo {
@@ -47,17 +46,25 @@ img {
   display: block;
   color: #000000;
   text-align: center;
-  padding: 12px 12px;
+  padding: 10px 10px;
   margin: 5px;
   text-decoration: none;
   font-size: 20px;
   font-family: Roboto, sans-serif;
 }
 
+.fa-bars {
+  color: #ff0000;
+}
+
 .topnav a:hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
+}
+
+.topnav a:hover .fa-bars {
+  color: #ffffff;
 }
 
 .topnav a.active {
@@ -68,24 +75,15 @@ img {
 
 .topnav .icon {
   display: none;
+  border-radius: 15px;
+  margin: 5px 0;
 }
-
-/* @media screen and (max-width: 768px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-} */
 
 main {
   font-size: 130%;
   font-weight: bolder;
   color: black;
-  padding-top: 0.5vw;
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin: 1px 20px 15px;
+  margin: 0 5%;
   border-radius: 2rem;
   text-align: justify;
 }
@@ -144,7 +142,8 @@ main {
 }
 
 .content {
-  margin: 5% auto;
+  font-size: initial;
+  margin: 120px auto 5% auto;
   width: 100%;
   min-height: 758px;
   max-width: 500px;
@@ -160,7 +159,7 @@ main {
 
 .modal-confirm {
   display: none;
-  margin-top: 280px;
+  padding-top: 278px;
   text-align: center;
 }
 
@@ -200,15 +199,18 @@ input {
   height: 48px;
 }
 
+.formData {
+  margin-bottom: 9px;
+}
+
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.6em;
+  font-size: 0.83em;
   color: #e54858;
   display: block;
   margin-top: 3px;
   margin-bottom: 3px;
   text-align: right;
-  /* line-height: 1em; */
   opacity: 0;
   transition: 0.3s;
 }
@@ -220,12 +222,18 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
+
+.formData[data-error-visible="true"] .check-control {
+  border: 2px solid #e54858;
+}
+
 /* 
 input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
 } */
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -410,12 +418,13 @@ input[data-error]::after {
 
 /* custom select end */
 .text-label {
+  padding: 0 0 6px 0;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .hero-section {
-  min-height: 93vh;
+  min-height: 75vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -425,13 +434,16 @@ input[data-error]::after {
 }
 
 .hero-content {
-  padding: 51px 20px 60px 51px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 70px 20px 70px 51px;
   grid-column: span 4;
   background: #232323;
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 450px;
+  min-width: 460px;
 }
 
 /* .hero-content::after {
@@ -453,13 +465,14 @@ input[data-error]::after {
   font-size: 6rem;
   font-weight: normal;
   white-space: normal;
-  min-width: 650px;
+  min-width: 800px;
 }
 
 .hero-text {
   font-weight: normal;
-  margin-top: 150px;
+  margin-top: 200px;
   padding: 0;
+  line-height: 36px;
 }
 
 .btn-signup {
@@ -486,7 +499,7 @@ input[data-error]::after {
   color: #fe142f;
   padding: 0;
   font-size: 1rem;
-  margin: 60px 0 30px;
+  margin: 80px 0 55px;
   font-weight: bolder;
 }
 
@@ -495,9 +508,7 @@ input[data-error]::after {
 }
 
 footer {
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin: 0 20px;
+  margin: 0 1%;
 }
 
 @keyframes modalopen {
